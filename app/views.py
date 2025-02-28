@@ -15,7 +15,6 @@ def index(request):
 
 def table(request):
     document = UploadedFile.objects.last()
-    print(document)
     if not document:
         return redirect('app:index')
 
