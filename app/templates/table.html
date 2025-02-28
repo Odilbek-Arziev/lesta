@@ -1,4 +1,5 @@
 {% extends 'base_layout.html' %} {% block content %}
+{{result}}
 <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
   <thead>
     <tr>
@@ -8,31 +9,13 @@
     </tr>
   </thead>
   <tbody>
+    {% for word, tf, idf in words %}
     <tr>
-        <td>Test</td>
-        <td>1</td>
-        <td>2</td>
+      <td>{{word}}</td>
+      <td>{{tf}}</td>
+      <td>{{idf}}</td>
     </tr>
-    <tr>
-        <td>Test</td>
-        <td>1</td>
-        <td>2</td>
-    </tr>
-    <tr>
-        <td>Test</td>
-        <td>1</td>
-        <td>2</td>
-    </tr>
-    <tr>
-        <td>Test</td>
-        <td>1</td>
-        <td>2</td>
-    </tr>
-    <tr>
-        <td>Test</td>
-        <td>1</td>
-        <td>2</td>
-    </tr>
+    {% endfor %}
   </tbody>
 </table>
 {% endblock %}

@@ -5,6 +5,7 @@
   <div class="column is-5">
     <div class="box">
       <form action="" class="has-text-centered" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
         <div class="title is-4">Загрузите ваш текстовый файл</div>
         <div class="field">
           <div class="file">
