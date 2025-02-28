@@ -52,14 +52,11 @@ class ProcessTextTest(unittest.TestCase):
         text = "Антон жил в маленьком городе. Он любил читать книги. Антон читал много."
         result = process_text(text)
 
-        # Проверяем, что результат не пуст
         self.assertGreater(len(result), 0)
 
-        # Проверяем, что результат содержит кортежи (слово, tf, idf)
         self.assertIsInstance(result[0], tuple)
         self.assertEqual(len(result[0]), 3)
 
-        # Проверяем, что TF и IDF числа (float)
         self.assertIsInstance(result[0][1], float)
         self.assertIsInstance(result[0][2], float)
 
@@ -67,25 +64,20 @@ class ProcessTextTest(unittest.TestCase):
         text = "И в во не что он на я с со как а то все она так его."
         result = process_text(text)
 
-        # Ожидаем, что после удаления стоп-слов список пустой
         self.assertEqual(result, [])
 
     def test_process_text_ordering(self):
         text = "Город был большим. Город менялся. В городе жили люди."
         result = process_text(text)
 
-        idf_values = [word_data[2] for word_data in result]  # Берём все IDF
-        self.assertEqual(
-            idf_values, sorted(idf_values, reverse=True)
-        )  # IDF должен убывать
+        idf_values = [word_data[2] for word_data in result]
+        self.assertEqual(idf_values, sorted(idf_values, reverse=True))
 
     def test_process_text_limit(self):
-        text = " ".join(
-            [f"слово{i} " * 3 for i in range(100)]
-        )  # Генерируем 100 уникальных слов
+        text = " ".join([f"слово{i} " * 3 for i in range(100)])
         result = process_text(text)
 
-        self.assertLessEqual(len(result), 50)  # Должно быть не больше 50 слов
+        self.assertLessEqual(len(result), 50)
 
 
 if __name__ == "__main__":
