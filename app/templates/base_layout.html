@@ -43,9 +43,7 @@
           </div>
           <div class="navbar-menu">
             <div class="navbar-end">
-                <div class="navbar-item">
-                    <a class="button is-info is-outlined" href="{% url 'app:table' %}">Показать таблицу</a>
-                </div>
+              <div class="navbar-item">{% block back %} {% endblock %}</div>
             </div>
           </div>
         </nav>

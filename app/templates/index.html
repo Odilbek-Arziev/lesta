@@ -1,5 +1,9 @@
 {% extends 'base_layout.html' %}
 
+{% block back %}
+<a class="button is-info is-outlined" href="{% url 'app:table' %}">Показать таблицу</a>
+{% endblock %}
+
 {% block content %}
 <div class="columns is-centered is-vcentered">
   <div class="column is-5">
@@ -26,6 +30,13 @@
             Загрузить
           </button>
         </div>
+        {% if error %}
+        <div class="error">
+          <div class="title is-5 has-text-danger">
+            {{error}}
+          </div>
+        </div>
+        {% endif %}
       </form>
     </div>
   </div>

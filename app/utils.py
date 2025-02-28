@@ -1,3 +1,4 @@
+from stopwords import get_stopwords
 import string
 import re
 import math
@@ -18,33 +19,13 @@ def clean_text(text):
 
     words = text.split()
 
-    stop_words = {
-        "и",
-        "в",
-        "во",
-        "не",
-        "что",
-        "он",
-        "на",
-        "я",
-        "с",
-        "со",
-        "как",
-        "а",
-        "то",
-        "все",
-        "она",
-        "так",
-        "его",
-    }
-
+    stop_words = get_stopwords("ru")
     words = [word for word in words if word not in stop_words]
 
     return [simple_stem(word) for word in words]
 
 
 def compute_tf(documents):
-    """Вычисляет TF для каждого слова (усредняя по документам)."""
     tf_values = {}
     total_documents = len(documents)
 
@@ -64,7 +45,6 @@ def compute_tf(documents):
 
 
 def compute_idf(documents):
-    """Вычисляет IDF по документам."""
     num_documents = len(documents)
     word_doc_count = {}
 
@@ -79,7 +59,6 @@ def compute_idf(documents):
 
 
 def process_text(text):
-    """Обрабатывает текст: чистит, делит на документы, считает TF и IDF."""
     documents = list(filter(None, re.split(r"[.!?]", text.lower())))
     cleaned_documents = [clean_text(doc) for doc in documents if doc.strip()]
 
@@ -87,4 +66,4 @@ def process_text(text):
     idf = compute_idf(cleaned_documents)
 
     sorted_words = sorted(idf, key=idf.get, reverse=True)
-    return [(word, tf[word], idf[word]) for word in sorted_words][:50]
+    return [(word, tf[word], idf[word]) for word in sorted_words][-50:]

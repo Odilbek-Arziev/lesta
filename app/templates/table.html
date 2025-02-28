@@ -1,4 +1,10 @@
-{% extends 'base_layout.html' %} {% block content %}
+{% extends 'base_layout.html' %}
+
+{% block back %}
+<a class="button is-info is-outlined" href="{% url 'app:index' %}">На главную</a>
+{% endblock %}
+
+{% block content %}
 <div class="container">
   {% if words %}
   <table
