@@ -1,21 +1,58 @@
 {% extends 'base_layout.html' %} {% block content %}
-{{result}}
-<table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-  <thead>
-    <tr>
-      <th>Слово</th>
-      <th>TF</th>
-      <th>IDF</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for word, tf, idf in words %}
-    <tr>
-      <td>{{word}}</td>
-      <td>{{tf}}</td>
-      <td>{{idf}}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-{% endblock %}
+<div class="container">
+  {% if words %}
+  <table
+    class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth"
+  >
+    <thead>
+      <tr>
+        <th>Слово</th>
+        <th>TF</th>
+        <th>IDF</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for word, tf, idf in words %}
+      <tr>
+        <td>{{word}}</td>
+        <td>{{tf}}</td>
+        <td>{{idf}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+  {% if words.has_other_pages %}
+  <nav class="pagination is-centered">
+    {% if words.has_previous %}
+    <a class="pagination-previous" href="?page={{words.previous_page_number}}">
+      Пред
+    </a>
+    <a class="pagination-link" href="?page=1"> В начало </a>
+    {% else %}
+    <button class="pagination-previous" disabled>Пред</button>
+    {% endif %} {% if words.has_next %}
+    <a class="pagination-next" href="?page={{ words.next_page_number }}">
+      Далее
+    </a>
+    <a href="?page={{ words.paginator.num_pages }}" class="pagination-next">
+      В конец
+    </a>
+    {% else %}
+    <button class="pagination-next" disabled>Далее</button>
+    {% endif %}
+
+    <ul class="pagination-list">
+      {% for page in words.paginator.page_range %}
+      <li>
+        <a
+          class="pagination-link {% if page == words.number %} is-current {% endif %}"
+          href="?page={{page}}"
+          >{{ page }}</a
+        >
+      </li>
+      {% endfor %}
+    </ul>
+  </nav>
+</div>
+{% endif %} {% endblock %}

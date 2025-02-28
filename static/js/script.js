@@ -1,13 +1,8 @@
-function updateFileName() {
-  const input = document.querySelector('input[type="file"]');
-  console.log(input);
+const file = document.querySelector('input[type="file"');
 
-  const fileName =
-    input.files.length > 0 ? input.files[0].name : "Файл не выбран";
-  console.log(fileName);
-
-  input.textContent = fileName;
-}
+file.addEventListener("change", () => {
+  document.querySelector(".file-name").textContent = 'Загружено'
+});
 
 const burger = document.querySelector(".navbar-burger");
 const menu = document.querySelector(".navbar-menu");

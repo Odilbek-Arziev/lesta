@@ -87,4 +87,4 @@ def process_text(text):
     idf = compute_idf(cleaned_documents)
 
     sorted_words = sorted(idf, key=idf.get, reverse=True)
-    return [(word, tf[word], idf[word]) for word in sorted_words]
+    return [(word, tf[word], idf[word]) for word in sorted_words][:50]
