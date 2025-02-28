@@ -1,0 +1,31 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+<div class="columns is-centered is-vcentered">
+  <div class="column is-5">
+    <div class="box">
+      <form action="" class="has-text-centered" method="post" enctype="multipart/form-data">
+        <div class="title is-4">Загрузите ваш текстовый файл</div>
+        <div class="field">
+          <div class="file">
+            <label class="file-label">
+              <input class="file-input" type="file" name="file" />
+              <span class="file-cta">
+                <span class="file-icon">
+                  <ion-icon name="cloud-upload"></ion-icon>
+                </span>
+                <span class="file-label"> Выберите файл… </span>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="py-3">
+          <button class="button is-fullwidth is-success is-outlined">
+            Загрузить
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
